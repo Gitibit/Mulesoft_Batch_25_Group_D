@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	
+	
+    <flow name="phonechecker" doc:id="75db3ae0-ef88-4192-a1d2-b6615032f8f8">
+		<json-logger:logger doc:name="Logger" doc:id="5a3088bc-a237-4e4c-81bf-211ee09ec3a7" config-ref="JSON_Logger_Config" message="log before api call" />
+		<http:request method="GET" doc:name="Request" doc:id="c131ccbb-94c7-442a-b3e3-f933cb24d62b" config-ref="HTTP_Request_configuration" path="api/validate">
+			<reconnect />
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"number" : "14158586273"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"access_key" : "3uLQ805UcLLorek8a3lpaG5g1Y9HNQst"
+}]]]></http:query-params>
+		</http:request>
+		<json-logger:logger doc:name="Logger" doc:id="55aa99b1-f69e-47ab-9153-1f9636c5e1a8" config-ref="JSON_Logger_Config" message="message"/>
+		<ee:transform>
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>	
+	
+	
+	
+	
+	
+</mule>

@@ -1,0 +1,22 @@
+#%RAML 1.0 
+title: phoneNumberChecker API
+
+uses:
+  Library: Library.raml
+
+/checkPhoneNumber:
+  securedBy:
+    - Library.meseSec
+  type:
+    Library.getRes:
+      exampleReference: 
+       !include Examples/validationResponse.raml
+  is:
+    - Library.ErrorRes
+    - Library.headres 
+
+    
+
+    
+  
+  
