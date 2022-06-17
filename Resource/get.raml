@@ -1,0 +1,17 @@
+#%RAML 1.0 ResourceType
+get:
+  description: validate the given customer phonenumber
+  queryParameters:
+    PhoneNumber:
+      type: string
+      minLength: 10
+      maxLength: 11
+        
+  responses:
+    200:
+      body:
+        application/json:
+          example:
+            <<exampleReference>>
+                  
+                            
