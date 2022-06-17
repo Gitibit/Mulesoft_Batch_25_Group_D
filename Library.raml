@@ -1,0 +1,13 @@
+#%RAML 1.0 Library
+usage: Library
+
+securitySchemes:
+  meseSec: !include securityScheme.raml
+traits:
+  ErrorRes: !include traits/errorResponse.raml
+  headers: !include traits/headers.raml
+types:
+  apiResp: !include DataTypes/types.raml
+resourceTypes:
+  getRes: !include Resource/get.raml
+  
